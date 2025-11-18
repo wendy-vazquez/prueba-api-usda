@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="fw-bold text-success">{{ receta.nombre }}</h2>
+<p>{{ receta.descripcion }}</p>
+
+<h4 class="fw-bold text-success mt-4">Ingredientes:</h4>
+<ul>
+  {% for ing in ingredientes %}
+  <li>
+      <strong>{{ ing.nombre }}</strong> — {{ ing.cantidad }} {{ ing.unidad }}
+      {% if ing.nutrientes %}
+      <ul>
+        {% for key, value in ing.nutrientes.items() %}
+        <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+<h4 class="fw-bold text-success mt-4">Preparación:</h4>
+<ol>
+  {% for p in receta.preparacion %}
+  <li>{{ p }}</li>
+  {% endfor %}
+</ol>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">⬅️ Volver</a>
+
+{% endblock %}
